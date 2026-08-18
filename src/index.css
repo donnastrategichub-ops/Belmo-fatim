@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --brand-forest: #1F5E4B;
+    --brand-forest-dark: #163A30;
+    --brand-forest-hover: #174A3B;
+    --brand-mint: #EAF5EF;
+    --brand-mint-light: #F2FAF5;
+    --brand-coral: #FF6B81;
+    --brand-coral-soft: #FFEBEB;
+  }
+
+  body {
+    font-family: 'Tajawal', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #F8FAF8;
+    color: #1A3028;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .font-latin {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .font-serif-brand {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-arabic {
+    font-family: 'Tajawal', system-ui, sans-serif;
+  }
+}
+
+/* Custom subtle scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Smooth tap effect */
+.tap-highlight-none {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Horizontal Snap Scroll with Peek */
+.snap-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.snap-card {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  flex-shrink: 0;
+}
+
+/* Shimmer Skeleton animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    #F1F5F2 0%,
+    #E4ECE6 35%,
+    #F8FAF8 50%,
+    #E4ECE6 65%,
+    #F1F5F2 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* Fly to cart pulse */
+@keyframes flyCartPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-cart-bounce {
+  animation: flyCartPulse 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}

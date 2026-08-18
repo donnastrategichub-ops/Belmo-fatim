@@ -1,0 +1,8 @@
+{
+  "name": "Remix Belmo — K-Beauty Maroc",
+  "description": "High-fidelity mobile ecommerce homepage for Belmo, Moroccan K-Beauty platform featuring Fatima\u0027s curated picks, skincare routines, and smart consultation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
