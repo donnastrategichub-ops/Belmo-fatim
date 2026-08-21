@@ -25,7 +25,7 @@ export const RoseBerryHeroShowcase: React.FC<RoseBerryHeroShowcaseProps> = ({
   const gridProducts = roseBerryProducts.filter((p) => p.id !== 'rose-berry-coffret-prestige-3-etages');
 
   return (
-    <section id="rose-berry-showcase" className="px-3 sm:px-4 py-8 sm:py-10 w-full max-w-full overflow-hidden">
+    <section id="rose-berry-showcase" className="px-3 sm:px-4 py-8 my-8 w-full max-w-full overflow-hidden">
       <div className="w-full max-w-5xl mx-auto space-y-8">
         
         {/* Section Header with Generous White Space */}

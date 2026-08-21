@@ -12,7 +12,12 @@ import { RoutinesSection } from './components/RoutinesSection';
 import { KBeautyNewInSection } from './components/KBeautyNewInSection';
 import { BestsellersSection } from './components/BestsellersSection';
 import { WhatsAppTestimonialsSection } from './components/WhatsAppTestimonialsSection';
-import { FatimaVideoSection } from './components/FatimaVideoSection';
+import {
+  MarqueeTickerDivider,
+  GiftingPerksBanner,
+  SeoulAuthenticityBanner,
+  WhatsAppConsultationBanner,
+} from './components/SectionDividerBanners';
 import { TrustReassuranceStrip } from './components/TrustReassuranceStrip';
 import { NewsletterSection } from './components/NewsletterSection';
 import { FloatingActions } from './components/FloatingActions';
@@ -239,10 +244,14 @@ export default function App() {
                 onDiscoverGifts={() => handleScrollToSection('gift-bundles-section')}
               />
 
-              {/* 2. TRUST BAR — Clean Reassurance Strip */}
+              {/* 2. OFFICIAL COLLABORATION & INTEGRATED VIDEO REELS */}
               <TrustBarStrip
-                onWatchVideos={() => handleScrollToSection('fatima-videos-section')}
+                onAddToCart={(p) => handleAddToCart(p, 1, true)}
+                onSelectProduct={(p) => setSelectedProduct(p)}
               />
+
+              {/* 🌟 DIVIDER BANNER 1: Dynamic Infinite Ticker Ribbon */}
+              <MarqueeTickerDivider />
 
               {/* 3. 🌟 ROSE BERRY SHOWCASE — Official 6 Products Spotlight */}
               <RoseBerryHeroShowcase
@@ -253,10 +262,9 @@ export default function App() {
                 onScrollToAll={() => handleScrollToSection('kbeauty-new-section')}
               />
 
-              {/* 4. 🎬 FATIMA EZZAHRA VIDEO REELS & REVIEWS */}
-              <FatimaVideoSection
-                onAddToCart={(p) => handleAddToCart(p, 1, true)}
-                onSelectProduct={(p) => setSelectedProduct(p)}
+              {/* 🎁 DIVIDER BANNER 2: Royal Gifting & Packaging Perks */}
+              <GiftingPerksBanner
+                onExploreGifts={() => handleScrollToSection('gift-bundles-section')}
               />
 
               {/* 5. GIFT BUNDLES — Curated Luxury Sets */}
@@ -268,6 +276,11 @@ export default function App() {
               <RoutinesSection
                 onAddRoutine={handleAddCuratedRoutine}
                 onSelectProduct={(p) => setSelectedProduct(p)}
+              />
+
+              {/* 🇰🇷 DIVIDER BANNER 3: Seoul Direct Import & Clinical Authenticity */}
+              <SeoulAuthenticityBanner
+                onOpenScanner={() => setIsAIScanModalOpen(true)}
               />
 
               {/* 7. K-BEAUTY EDIT — Seoul Viral Trends */}
@@ -290,6 +303,11 @@ export default function App() {
                   onViewAll={() => setIsSearchOpen(true)}
                 />
               </div>
+
+              {/* 💬 DIVIDER BANNER 4: WhatsApp VIP Skin Advice & Consultation */}
+              <WhatsAppConsultationBanner
+                onOpenConsultation={() => setIsAIModalOpen(true)}
+              />
 
               {/* 9. CUSTOMER TESTIMONIALS & AUDIO NOTES */}
               <div id="testimonials-section">

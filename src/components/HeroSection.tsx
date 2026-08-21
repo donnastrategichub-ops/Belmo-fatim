@@ -25,7 +25,7 @@ export const HeroSection = ({ onDiscoverGifts, onDiscoverRoseBerry }: HeroSectio
   ];
 
   return (
-    <section className="px-3 sm:px-4 py-8 w-full max-w-full overflow-hidden">
+    <section className="px-3 sm:px-4 py-8 my-8 w-full max-w-full overflow-hidden">
       <div className="w-full max-w-5xl mx-auto">
         <div className="relative w-full rounded-[28px] sm:rounded-[36px] overflow-hidden bg-slate-950 border border-slate-100 shadow-[0_12px_40px_rgba(31,94,75,0.08)] min-h-[420px] sm:min-h-[480px] flex flex-col justify-between p-5 sm:p-10 select-none">
           

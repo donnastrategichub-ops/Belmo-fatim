@@ -13,7 +13,7 @@ export const NewsletterSection = () => {
   };
 
   return (
-    <section className="px-3 sm:px-4 py-8 sm:py-12 mb-4 w-full max-w-full overflow-hidden">
+    <section className="px-3 sm:px-4 py-8 my-8 w-full max-w-full overflow-hidden">
       <div className="w-full max-w-5xl mx-auto bg-white rounded-3xl border border-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.02)] p-6 sm:p-8 relative overflow-hidden text-center space-y-4">
         {/* Subtle decorative gift icon */}
         <div className="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-700 mx-auto">

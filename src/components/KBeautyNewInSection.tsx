@@ -19,7 +19,7 @@ export const KBeautyNewInSection = ({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="kbeauty-new-section" className="px-3 sm:px-4 py-8 sm:py-10 w-full max-w-full overflow-hidden">
+    <section id="kbeauty-new-section" className="px-3 sm:px-4 py-8 my-8 w-full max-w-full overflow-hidden">
       <div className="w-full max-w-5xl mx-auto space-y-5 sm:space-y-6">
         
         {/* Section Header with Generous White Space */}

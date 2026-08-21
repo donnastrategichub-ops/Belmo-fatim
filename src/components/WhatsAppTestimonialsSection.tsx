@@ -42,7 +42,7 @@ export const WhatsAppTestimonialsSection = ({
   const chatCount = WHATSAPP_TESTIMONIALS.filter((t) => t.type === 'screenshot').length;
 
   return (
-    <section className="py-8 sm:py-12 px-3 sm:px-4 bg-gradient-to-b from-white via-[#F7FAF8] to-white border-b border-slate-100 w-full max-w-full overflow-hidden">
+    <section className="px-3 sm:px-4 py-8 my-8 bg-gradient-to-b from-white via-[#F7FAF8] to-white border-b border-slate-100 w-full max-w-full overflow-hidden">
       <div className="w-full max-w-5xl mx-auto space-y-6 sm:space-y-8">
         {/* Section Header */}
         <div className="text-center">

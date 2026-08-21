@@ -23,7 +23,7 @@ export const MenuDrawer = ({
       icon: Sparkles,
     },
     {
-      id: 'fatima-videos-section',
+      id: 'official-collaboration-bar',
       label: 'فيديوهات وتجارب فاطمة الزهراء',
       badge: 'ريلز وأنبوكسينغ 🎬',
       icon: Heart,

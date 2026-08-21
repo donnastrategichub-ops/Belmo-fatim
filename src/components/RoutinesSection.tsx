@@ -26,7 +26,7 @@ export const RoutinesSection = ({ onAddRoutine }: RoutinesSectionProps) => {
   };
 
   return (
-    <section id="routines-section" className="px-3 sm:px-4 py-8 sm:py-12 bg-[#FBFDFB] border-y border-slate-100 scroll-mt-14 w-full max-w-full overflow-hidden">
+    <section id="routines-section" className="px-3 sm:px-4 py-8 my-8 bg-[#FBFDFB] border-y border-slate-100 scroll-mt-14 w-full max-w-full overflow-hidden">
       <div className="w-full max-w-5xl mx-auto space-y-6 sm:space-y-8">
         
         {/* Section Header */}

@@ -7,7 +7,7 @@ interface AccountViewProps {
 
 export const AccountView = ({ onOpenAI, onOpenWishlist }: AccountViewProps) => {
   return (
-    <div className="px-4 py-5 min-h-[70vh]">
+    <div className="px-3 sm:px-4 py-8 my-8 min-h-[70vh] w-full max-w-5xl mx-auto">
       <div className="bg-white rounded-2xl border border-slate-100/90 shadow-2xs p-5 space-y-4">
         {/* Profile Info */}
         <div className="flex items-center gap-3 pb-4 border-b border-slate-100">

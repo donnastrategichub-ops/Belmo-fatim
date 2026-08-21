@@ -27,7 +27,7 @@ export const WishlistView = ({
   }, [wishlistProducts, currentSort]);
 
   return (
-    <div className="px-4 py-5 min-h-[70vh]">
+    <div className="px-3 sm:px-4 py-8 my-8 min-h-[70vh] w-full max-w-5xl mx-auto">
       <div className="bg-white rounded-2xl border border-slate-100/90 shadow-2xs p-5">
         <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
           <div className="flex items-center gap-2">

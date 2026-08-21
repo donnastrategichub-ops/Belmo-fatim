@@ -30,7 +30,7 @@ export const TrustReassuranceStrip = () => {
   ];
 
   return (
-    <section className="px-3 sm:px-4 py-8 w-full max-w-full overflow-hidden">
+    <section className="px-3 sm:px-4 py-8 my-8 w-full max-w-full overflow-hidden">
       <div className="w-full max-w-5xl mx-auto bg-white rounded-2xl border border-slate-100 p-4 sm:p-5 shadow-[0_4px_25px_rgba(0,0,0,0.02)]">
         <div className="grid grid-cols-5 gap-2 text-center">
           {items.map((item, idx) => {
