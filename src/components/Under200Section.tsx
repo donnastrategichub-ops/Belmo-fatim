@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Sparkles, ArrowLeft, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Sparkles, ArrowLeft } from 'lucide-react';
 import { Product } from '../types';
 import { ProductCard } from './ProductCard';
 import { Under200GridSkeleton } from './Skeletons';
@@ -34,22 +34,22 @@ export const Under200Section = ({
   }, [products, filter]);
 
   return (
-    <section className="px-4 py-4">
-      <div className="max-w-5xl mx-auto bg-white rounded-[28px] border border-emerald-950/5 shadow-[0_4px_25px_rgba(31,94,75,0.03)] p-5 sm:p-7">
+    <section className="px-3 sm:px-4 py-4 w-full max-w-full overflow-hidden">
+      <div className="w-full max-w-5xl mx-auto bg-white rounded-[22px] sm:rounded-[28px] border border-emerald-950/5 shadow-[0_4px_25px_rgba(31,94,75,0.03)] p-3.5 sm:p-6">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 text-right">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3.5 text-right">
           <div>
-            <div className="inline-flex items-center gap-1.5 bg-[#EAF5EF] text-[#1F5E4B] px-3 py-1 rounded-full text-[11px] font-bold mb-1.5 shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-1 bg-[#EAF5EF] text-[#1F5E4B] px-2.5 py-0.5 rounded-full text-[10px] font-bold mb-1 shadow-2xs">
+              <Sparkles className="w-3 h-3" />
               <span>جربي بلا ما تخلعي</span>
             </div>
 
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+            <h2 className="text-base sm:text-xl font-black text-slate-900 tracking-tight">
               بغيتي تجربي Belmo بلا ما تصرفي بزاف؟
             </h2>
 
-            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+            <p className="text-xs text-slate-600 mt-0.5">
               اختيارات كورية أصلية ومضمونة بأسعار تحت 200 DH
             </p>
           </div>
@@ -58,20 +58,20 @@ export const Under200Section = ({
           <div className="flex items-center gap-1.5 bg-[#F8FAF8] p-1 rounded-full border border-slate-200/80 self-start sm:self-auto overflow-x-auto no-scrollbar">
             <button
               onClick={() => setFilter('all')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+              className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                 filter === 'all'
-                  ? 'bg-[#1F5E4B] text-white shadow-2xs'
+                  ? 'bg-[#162A22] text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              الكل (تحت 200 DH)
+              الكل تحت 200 DH
             </button>
 
             <button
               onClick={() => setFilter('under150')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+              className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                 filter === 'under150'
-                  ? 'bg-[#1F5E4B] text-white shadow-2xs'
+                  ? 'bg-[#162A22] text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -80,9 +80,9 @@ export const Under200Section = ({
 
             <button
               onClick={() => setFilter('150to200')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+              className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                 filter === '150to200'
-                  ? 'bg-[#1F5E4B] text-white shadow-2xs'
+                  ? 'bg-[#162A22] text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -91,13 +91,13 @@ export const Under200Section = ({
           </div>
         </div>
 
-        {/* Section 4: Mobile Swipe Slider with partial peek + Desktop Grid */}
+        {/* Responsive Controlled 2-Column Mobile Grid, 4-Column Desktop */}
         {isLoading ? (
           <Under200GridSkeleton />
         ) : (
-          <div className="flex sm:grid sm:grid-cols-3 lg:grid-cols-4 gap-3 overflow-x-auto no-scrollbar pb-2 snap-slider mb-4">
-            {filteredItems.map((prod) => (
-              <div key={prod.id} className="snap-card w-[185px] sm:w-auto shrink-0 sm:shrink">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 w-full mb-3.5">
+            {filteredItems.slice(0, 4).map((prod) => (
+              <div key={prod.id} className="w-full min-w-0">
                 <ProductCard
                   product={prod}
                   isWishlisted={wishlistIds.includes(prod.id)}
@@ -115,7 +115,7 @@ export const Under200Section = ({
         {onViewAll && (
           <button
             onClick={onViewAll}
-            className="w-full text-xs font-bold text-slate-800 hover:text-[#1F5E4B] flex items-center justify-center gap-2 py-3 border border-slate-200/80 rounded-full bg-[#F8FAF8] hover:bg-white transition-colors cursor-pointer"
+            className="w-full text-xs font-bold text-slate-800 hover:text-[#1F5E4B] flex items-center justify-center gap-1.5 py-2.5 border border-slate-200/80 rounded-full bg-[#F8FAF8] hover:bg-white transition-colors cursor-pointer active:scale-98"
           >
             <span>شوفي جميع المنتجات المناسبة للميزانية</span>
             <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-0" />

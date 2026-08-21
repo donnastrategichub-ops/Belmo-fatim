@@ -13,29 +13,34 @@ export const BuildRoutineByBudget = ({ onAddRoutine }: BuildRoutineByBudgetProps
   // Derive active steps from budget
   let activeTier = 'starter';
   let tierName = 'روتين البداية (2 خطوات)';
-  let desc = 'غسول لتنظيف المسام + واقي شمس مغذي بالأرز';
+  let desc = 'غسول لتنظيف المسام + واقي شمس أكوا فريش بالأرز';
   let products = [
-    PRODUCTS.find((p) => p.id === 'anua-cleansing-foam') || PRODUCTS[0],
-    PRODUCTS.find((p) => p.id === 'boj-relief-sun-rice') || PRODUCTS[3],
+    PRODUCTS.find((p) => p.id === 'anua-heartleaf-quercetinol-cleansing-foam') || PRODUCTS[0],
+    PRODUCTS.find((p) => p.id === 'boj-relief-sun-aqua-fresh-rice-b5') || PRODUCTS[1],
   ];
-  let totalOriginal = 370;
-  let totalCurrent = 308;
+  let totalOriginal = 405;
+  let totalCurrent = 338;
   let filledDots = 2;
 
   if (budgetValue < 250) {
     activeTier = 'basic';
-    tierName = 'نضارة أساسية (خطوة واحدة)';
-    desc = 'غسول كوري منظف ولطيف كيحافظ على توازن البشرة اليومي';
-    products = [PRODUCTS.find((p) => p.id === 'anua-cleansing-foam') || PRODUCTS[0]];
-    totalOriginal = 160;
-    totalCurrent = 129;
+    tierName = 'نضارة وتنظيف أساسي (خطوة واحدة)';
+    desc = 'غسول هارتليف كوري عميق ينقي المسام ويحافظ على توازن البشرة';
+    products = [PRODUCTS.find((p) => p.id === 'anua-heartleaf-quercetinol-cleansing-foam') || PRODUCTS[0]];
+    totalOriginal = 185;
+    totalCurrent = 149;
     filledDots = 1;
   } else if (budgetValue >= 450) {
     activeTier = 'complete';
     tierName = 'Glass Skin كامل (4 خطوات)';
-    desc = 'تنظيف + سيروم جينسنغ علاجي + ترطيب 77% + واقي شمس بالأرز';
-    products = PRODUCTS.filter((p) => p.isFatimaPick);
-    totalOriginal = 756;
+    desc = 'تنظيف مسام + سيروم عكبر توهج + كريم ترميم 345 + واقي شمس أكوا فريش';
+    products = [
+      PRODUCTS.find((p) => p.id === 'anua-heartleaf-quercetinol-cleansing-foam') || PRODUCTS[0],
+      PRODUCTS.find((p) => p.id === 'boj-glow-serum-propolis-niacinamide') || PRODUCTS[1],
+      PRODUCTS.find((p) => p.id === 'dr-althea-345-relief-cream') || PRODUCTS[2],
+      PRODUCTS.find((p) => p.id === 'boj-relief-sun-aqua-fresh-rice-b5') || PRODUCTS[3],
+    ];
+    totalOriginal = 786;
     totalCurrent = 549;
     filledDots = 4;
   }
@@ -43,8 +48,8 @@ export const BuildRoutineByBudget = ({ onAddRoutine }: BuildRoutineByBudgetProps
   const savings = totalOriginal - totalCurrent;
 
   return (
-    <section className="px-4 py-4">
-      <div className="max-w-5xl mx-auto bg-white rounded-[28px] border border-emerald-950/5 shadow-[0_4px_25px_rgba(31,94,75,0.03)] p-5 sm:p-7">
+    <section className="px-3 sm:px-4 py-4 w-full max-w-full overflow-hidden">
+      <div className="w-full max-w-5xl mx-auto bg-white rounded-[22px] sm:rounded-[28px] border border-emerald-950/5 shadow-[0_4px_25px_rgba(31,94,75,0.03)] p-3.5 sm:p-6">
         
         {/* Header */}
         <div className="text-center mb-5">

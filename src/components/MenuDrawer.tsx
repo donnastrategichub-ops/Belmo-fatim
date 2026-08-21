@@ -17,49 +17,45 @@ export const MenuDrawer = ({
 
   const menuLinks = [
     {
-      id: 'fatima-picks-section',
-      label: 'اختيارات فاطمة',
-      badge: 'حصري',
+      id: 'rose-berry-showcase',
+      label: 'مكياج وبوكسات روز بيري الإماراتية',
+      badge: 'ROSE BERRY 🇦🇪',
       icon: Sparkles,
     },
     {
-      id: 'routine-section',
-      label: 'روتين فاطمة الكامل (4 خطوات)',
-      badge: 'وفرّي DH 207',
+      id: 'fatima-videos-section',
+      label: 'فيديوهات وتجارب فاطمة الزهراء',
+      badge: 'ريلز وأنبوكسينغ 🎬',
       icon: Heart,
+    },
+    {
+      id: 'gift-bundles-section',
+      label: 'بوكسات الهدايا والتغليف الملكي',
+      badge: 'GIFT BOX 🎁',
+      icon: Gift,
+    },
+    {
+      id: 'routines-section',
+      label: 'الروتينات العلاجية الكورية المتسلسلة',
+      badge: 'تخفيض خاص',
+      icon: Sparkles,
+    },
+    {
+      id: 'kbeauty-new-section',
+      label: 'جديد العناية الكورية (K-Beauty)',
+      badge: 'ترند سيول',
+      icon: Flame,
+    },
+    {
+      id: 'catalog-section',
+      label: 'كتالوج المنتجات الأكثر مبيعاً',
+      icon: Tag,
     },
     {
       id: 'testimonials-section',
       label: 'رسائل وأوديوات واتساب (تجارب حقيقية)',
       badge: 'صوت وسكرينات',
       icon: MessageSquare,
-    },
-    {
-      id: 'tombla-section',
-      label: 'طومبولا فاطمة الزهراء',
-      badge: 'هدايا وجوائز',
-      icon: Gift,
-    },
-    {
-      id: 'bestsellers-section',
-      label: 'المنتجات الأكثر مبيعاً',
-      icon: Flame,
-    },
-    {
-      id: 'gifts-section',
-      label: 'بوكسات الهدايا والتغليف الفاخر',
-      badge: 'جديد',
-      icon: Gift,
-    },
-    {
-      id: 'concerns-section',
-      label: 'شنو محتاجة بشرتك؟ (استشارة)',
-      icon: HelpCircle,
-    },
-    {
-      id: 'under200-section',
-      label: 'Beauty Finds تحت 200 DH',
-      icon: Tag,
     },
   ];
 

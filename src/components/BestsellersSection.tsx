@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Flame, ArrowLeft, ArrowUpLeft } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { Product, SortOption } from '../types';
 import { BestsellersSkeleton } from './Skeletons';
 import { SortDropdown } from './SortDropdown';
@@ -23,50 +23,51 @@ export const BestsellersSection = ({
   onToggleWishlist,
   onAddToCart,
   onSelectProduct,
-  onViewAll,
 }: BestsellersSectionProps) => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [currentSort, setCurrentSort] = useState<SortOption>('recommended');
 
   const categories = [
-    { id: 'all', label: 'الكل' },
-    { id: 'face', label: 'الوجه' },
-    { id: 'serum', label: 'سيرومات' },
-    { id: 'moisturizer', label: 'مرطبات' },
-    { id: 'sunscreen', label: 'واقي شمس' },
+    { id: 'all', label: 'الكل (All)' },
+    { id: 'korean', label: 'العناية الكورية 🇰🇷' },
+    { id: 'rose-berry', label: 'مكياج روز بيري 🇦🇪' },
+    { id: 'serums', label: 'سيرومات' },
+    { id: 'cleansers', label: 'غسول وتنظيف' },
+    { id: 'gifts', label: 'بوكسات وهدايا 🎁' },
   ];
 
   const processedProducts = useMemo(() => {
     let list = products.filter((p) => {
-      if (!p.isBestseller) return false;
       if (activeCategory === 'all') return true;
-      if (activeCategory === 'face') return ['cleanser', 'toner', 'essence'].includes(p.category);
-      return p.category === activeCategory;
+      if (activeCategory === 'korean') return p.brand !== 'ROSE BERRY';
+      if (activeCategory === 'rose-berry') return p.brand === 'ROSE BERRY';
+      if (activeCategory === 'serums') return p.category === 'serum' || p.nameAr.includes('سيروم') || p.nameAr.includes('أمبولة') || p.nameAr.includes('إيسنس');
+      if (activeCategory === 'cleansers') return p.category === 'cleanser' || p.nameAr.includes('غسول') || p.nameAr.includes('تنظيف') || p.nameAr.includes('زيت') || p.nameAr.includes('بلسم');
+      if (activeCategory === 'gifts') return p.category === 'gift' || p.category === 'gift-bundle' || p.nameAr.includes('كوفري') || p.nameAr.includes('كيت') || p.nameAr.includes('باك');
+      return true;
     });
 
     return sortProducts(list, currentSort);
   }, [products, activeCategory, currentSort]);
 
   return (
-    <section className="px-4 py-4">
-      <div className="max-w-5xl mx-auto bg-white rounded-[28px] border border-emerald-950/5 shadow-[0_8px_30px_rgb(31,94,75,0.04)] p-5 sm:p-7">
-        {/* Header with Title & Sort Dropdown */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+    <section id="catalog-section" className="px-3 sm:px-4 py-8 sm:py-12 w-full max-w-full overflow-hidden">
+      <div className="w-full max-w-5xl mx-auto space-y-6 sm:space-y-8">
+        
+        {/* Header with Title & Sort */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-right">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider font-latin">
-                BESTSELLERS
-              </span>
-              <span className="w-1 h-1 rounded-full bg-slate-300" />
-              <div className="flex items-center gap-1.5">
-                <h2 className="text-base sm:text-lg font-black text-slate-900">
-                  المنتجات الأكثر مبيعاً
-                </h2>
-                <Flame className="w-4 h-4 text-amber-500 fill-amber-500" />
-              </div>
+            <div className="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-bold mb-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+              <span>تشكيلة المنتجات الأصلية 100%</span>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">
-              الأكثر طلباً وتقييماً من عاشقات الـ K-Beauty في المغرب
+
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              جميع المنتجات المختارة
+            </h2>
+
+            <p className="text-xs sm:text-sm text-slate-500 mt-1">
+              مكياج روز بيري الإماراتي الفاخر وأجود منتجات العناية بالبشرة الكورية
             </p>
           </div>
 
@@ -79,18 +80,18 @@ export const BestsellersSection = ({
           </div>
         </div>
 
-        {/* Filter Chips */}
-        <div className="flex gap-2 overflow-x-auto pb-2 mb-4 no-scrollbar">
+        {/* Filter Tabs with Ample Spacing */}
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none w-full">
           {categories.map((cat) => {
             const isActive = activeCategory === cat.id;
             return (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer shrink-0 ${
                   isActive
-                    ? 'bg-[#162A22] text-white shadow-xs'
-                    : 'bg-[#F8FAF8] text-slate-600 hover:bg-slate-100 border border-slate-200/60'
+                    ? 'bg-slate-900 text-white shadow-sm'
+                    : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
                 }`}
               >
                 {cat.label}
@@ -99,34 +100,24 @@ export const BestsellersSection = ({
           })}
         </div>
 
-        {/* Section 4: Mobile Swipe Slider with partial peek + Desktop Grid */}
+        {/* Product Grid with Generous Spacing and White Space */}
         {isLoading ? (
           <BestsellersSkeleton />
         ) : (
-          <div className="flex sm:grid sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 overflow-x-auto no-scrollbar pb-2 snap-slider">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
             {processedProducts.map((product) => (
-              <div key={product.id} className="snap-card w-[220px] sm:w-auto shrink-0 sm:shrink">
-                <ProductCard
-                  product={product}
-                  isWishlisted={wishlistIds.includes(product.id)}
-                  onToggleWishlist={onToggleWishlist}
-                  onAddToCart={onAddToCart}
-                  onSelectProduct={onSelectProduct}
-                  variant="grid"
-                />
-              </div>
+              <ProductCard
+                key={product.id}
+                product={product}
+                isWishlisted={wishlistIds.includes(product.id)}
+                onToggleWishlist={onToggleWishlist}
+                onAddToCart={onAddToCart}
+                onSelectProduct={onSelectProduct}
+              />
             ))}
           </div>
         )}
 
-        {/* View All CTA */}
-        <button
-          onClick={onViewAll}
-          className="w-full mt-4 text-xs font-bold text-slate-800 hover:text-slate-950 flex items-center justify-center gap-2 py-3 border border-slate-200/80 rounded-full bg-white hover:bg-slate-50 transition-colors shadow-2xs cursor-pointer"
-        >
-          <span>عرض جميع المنتجات الأكثر مبيعاً</span>
-          <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-0" />
-        </button>
       </div>
     </section>
   );

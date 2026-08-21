@@ -98,8 +98,8 @@ export const TomblaSection = ({ onOpenTomblaModal, onApplyGiftCode }: TomblaSect
   };
 
   return (
-    <section id="tombla-section" className="px-4 py-5 bg-[#EDF3EE]/40">
-      <div className="max-w-5xl mx-auto bg-white rounded-[28px] border border-amber-200/60 shadow-[0_8px_30px_rgb(31,94,75,0.04)] p-5 sm:p-7 relative overflow-hidden">
+    <section id="tombla-section" className="px-3 sm:px-4 py-5 bg-[#EDF3EE]/40 w-full max-w-full overflow-hidden">
+      <div className="w-full max-w-5xl mx-auto bg-white rounded-[22px] sm:rounded-[28px] border border-amber-200/60 shadow-[0_8px_30px_rgb(31,94,75,0.04)] p-3.5 sm:p-6 relative overflow-hidden">
         {/* Section Header */}
         <div className="text-center mb-6 relative z-10">
           <div className="inline-flex items-center gap-1.5 bg-amber-50 text-amber-900 border border-amber-200 px-3.5 py-1 rounded-full text-xs font-bold mb-2 shadow-2xs">

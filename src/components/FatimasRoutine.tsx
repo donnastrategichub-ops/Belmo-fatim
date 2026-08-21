@@ -23,8 +23,8 @@ export const FatimasRoutine = ({
   const [viewMode, setViewMode] = useState<'stack' | 'grid'>('stack');
 
   return (
-    <section id="routine-section" className="px-4 py-4">
-      <div className="max-w-5xl mx-auto space-y-4">
+    <section id="routine-section" className="px-3 sm:px-4 py-4 w-full max-w-full overflow-hidden">
+      <div className="w-full max-w-5xl mx-auto space-y-4">
         
         {/* Section Title Header */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-right">

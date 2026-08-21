@@ -1,30 +1,22 @@
 import { useState, useEffect } from 'react';
-import { PRODUCTS, FATIMA_ROUTINE_STEPS } from './data/products';
-import { Product, CartItem, VideoItem, RoutineStep } from './types';
+import { PRODUCTS, GIFT_BUNDLES, CURATED_ROUTINES } from './data/products';
+import { Product, CartItem, GiftBundle, CuratedRoutine } from './types';
 
 // Components
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
-import { TrustBenefits } from './components/TrustBenefits';
-import { SkinConcernSection } from './components/SkinConcernSection';
-import { BelmoAISection } from './components/BelmoAISection';
-import { FatimaWhyBelmo } from './components/FatimaWhyBelmo';
-import { FatimasRoutine } from './components/FatimasRoutine';
-import { BeforeAfterSlider } from './components/BeforeAfterSlider';
-import { SwipeToDiscover } from './components/SwipeToDiscover';
+import { TrustBarStrip } from './components/TrustBarStrip';
+import { RoseBerryHeroShowcase } from './components/RoseBerryHeroShowcase';
+import { GiftBundlesSection } from './components/GiftBundlesSection';
+import { RoutinesSection } from './components/RoutinesSection';
+import { KBeautyNewInSection } from './components/KBeautyNewInSection';
 import { BestsellersSection } from './components/BestsellersSection';
-import { BuildRoutineByBudget } from './components/BuildRoutineByBudget';
-import { Under200Section } from './components/Under200Section';
-import { GiftsSection } from './components/GiftsSection';
 import { WhatsAppTestimonialsSection } from './components/WhatsAppTestimonialsSection';
-import { TomblaSection } from './components/TomblaSection';
+import { FatimaVideoSection } from './components/FatimaVideoSection';
 import { TrustReassuranceStrip } from './components/TrustReassuranceStrip';
 import { NewsletterSection } from './components/NewsletterSection';
 import { FloatingActions } from './components/FloatingActions';
-import { BottomNav } from './components/BottomNav';
-import { StickyBottomCart } from './components/StickyBottomCart';
 import { InstantAddedSheet } from './components/InstantAddedSheet';
-import { InstagramStoryModal } from './components/InstagramStoryModal';
 
 // Modals & Drawers
 import { CartDrawer } from './components/CartDrawer';
@@ -32,8 +24,6 @@ import { SearchModal } from './components/SearchModal';
 import { MenuDrawer } from './components/MenuDrawer';
 import { SkinAIScanModal } from './components/SkinAIScanModal';
 import { BelmoAIModal } from './components/BelmoAIModal';
-import { TomblaModal } from './components/TomblaModal';
-import { VideoModal } from './components/VideoModal';
 import { ProductQuickViewModal } from './components/ProductQuickViewModal';
 import { WishlistView } from './components/WishlistView';
 import { AccountView } from './components/AccountView';
@@ -49,9 +39,6 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAIScanModalOpen, setIsAIScanModalOpen] = useState(false);
   const [isAIModalOpen, setIsAIModalOpen] = useState(false);
-  const [isTomblaModalOpen, setIsTomblaModalOpen] = useState(false);
-  const [isStoryModalOpen, setIsStoryModalOpen] = useState(false);
-  const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [addedProductForSheet, setAddedProductForSheet] = useState<Product | null>(null);
   const [isInstantSheetOpen, setIsInstantSheetOpen] = useState(false);
@@ -60,7 +47,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 450);
+    }, 200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -71,7 +58,7 @@ export default function App() {
       quantity: 1,
     },
   ]);
-  const [wishlistIds, setWishlistIds] = useState<string[]>(['boj-ginseng-serum']);
+  const [wishlistIds, setWishlistIds] = useState<string[]>([]);
 
   // Toast notifications
   const [toast, setToast] = useState<{ message: string; type: 'cart' | 'wishlist' | 'info' | 'gift' } | null>(null);
@@ -105,36 +92,42 @@ export default function App() {
     }
   };
 
-  const handleAddRoutineBundle = () => {
-    FATIMA_ROUTINE_STEPS.forEach((step) => {
-      const matched = PRODUCTS.find((p) => p.nameAr.includes(step.brand) || p.brand === step.brand) || PRODUCTS[0];
-      handleAddToCart(matched, 1, false);
-    });
-    showToast('تمت إضافة روتين فاطمة كاملاً بخصم خاص (وفّرتي DH 207)!', 'cart');
-    setIsCartOpen(true);
-  };
-
-  const handleAddRoutineList = (productsToAdd: Product[]) => {
-    productsToAdd.forEach((p) => handleAddToCart(p, 1, false));
-    showToast(`تمت إضافة ${productsToAdd.length} منتجات لسلتك بنجاح!`, 'cart');
-    setIsCartOpen(true);
-  };
-
-  const handleAddGiftBox = (gift: { id: string; nameAr: string; brand: string; price: number; image: string }) => {
-    const giftProduct: Product = {
-      id: gift.id,
-      brand: gift.brand,
-      nameAr: gift.nameAr,
-      nameEn: 'Gift Box Set',
-      category: 'gift',
-      price: gift.price,
-      rating: 5.0,
-      reviewsCount: 89,
-      image: gift.image,
-      descriptionAr: 'بوكس هدايا فاخر مجهز بأجود منتجات العناية الكورية مع بطاقة إهداء مخصصة.',
-      howToUseAr: 'هدية جاهزة للتقديم مباشرة.',
+  const handleAddGiftBundleObject = (bundle: GiftBundle) => {
+    const bundleProduct: Product = {
+      id: bundle.id,
+      brand: 'ROSE BERRY × BELMO',
+      nameAr: bundle.nameAr,
+      nameEn: bundle.nameEn,
+      category: 'gift-bundle',
+      price: bundle.price,
+      originalPrice: bundle.originalPrice,
+      rating: bundle.rating,
+      reviewsCount: bundle.reviewsCount,
+      image: bundle.image,
+      descriptionAr: bundle.taglineAr,
+      howToUseAr: 'بوكس هدايا فاخر مجهز ومغلف بشريط ساتان وبطاقة إهداء مخصصة مجاناً.',
     };
-    handleAddToCart(giftProduct, 1, true);
+    handleAddToCart(bundleProduct, 1, true);
+    showToast(`تمت إضافة ${bundle.nameAr} للسلة بنجاح! 🎁`, 'gift');
+  };
+
+  const handleAddCuratedRoutine = (routine: CuratedRoutine) => {
+    const routineProduct: Product = {
+      id: routine.id,
+      brand: 'BELMO PROTOCOL',
+      nameAr: routine.nameAr,
+      nameEn: routine.nameEn,
+      category: 'routine-set',
+      price: routine.price,
+      originalPrice: routine.originalPrice,
+      rating: 4.9,
+      reviewsCount: 112,
+      image: routine.steps[0]?.image || '/src/assets/images/skincare_routine_line_1787165422879.jpg',
+      descriptionAr: routine.clinicalNoteAr,
+      howToUseAr: 'يتبع التسلسل العلاجي المرقم من 1 إلى 4 يومياً.',
+    };
+    handleAddToCart(routineProduct, 1, true);
+    showToast(`تمت إضافة ${routine.nameAr} كاملة لسلتك مع توفير ${routine.savings} DH! ✨`, 'cart');
   };
 
   const handleUpdateQuantity = (productId: string, delta: number) => {
@@ -174,7 +167,7 @@ export default function App() {
     });
   };
 
-  // Scroll to section smoothly
+  // Scroll to section manually when requested
   const handleScrollToSection = (sectionId: string) => {
     setActiveTab('home');
     setTimeout(() => {
@@ -182,17 +175,21 @@ export default function App() {
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 100);
+    }, 50);
   };
 
   // Filter products based on selected category pill
   const filteredProducts = activeCategory === 'all'
     ? PRODUCTS
     : PRODUCTS.filter((p) => {
-        if (activeCategory === 'serums') return p.category === 'serum' || p.nameAr.includes('سيروم') || p.nameAr.includes('أمبولة');
+        if (activeCategory === 'korean-skin') return p.brand !== 'ROSE BERRY';
+        if (activeCategory === 'rose-berry') return p.brand === 'ROSE BERRY';
+        if (activeCategory === 'gift-sets') return p.category === 'gift' || p.category === 'gift-bundle' || p.nameAr.includes('كوفري') || p.nameAr.includes('كيت') || p.nameAr.includes('باك');
+        if (activeCategory === 'serums') return p.category === 'serum' || p.nameAr.includes('سيروم') || p.nameAr.includes('إيسنس') || p.nameAr.includes('أمبولة');
+        if (activeCategory === 'cleanser') return p.category === 'cleanser' || p.nameAr.includes('غسول') || p.nameAr.includes('تنظيف') || p.nameAr.includes('بلسم') || p.nameAr.includes('زيت');
         if (activeCategory === 'sunscreen') return p.category === 'sunscreen' || p.nameAr.includes('شمس');
-        if (activeCategory === 'moisturizer') return p.category === 'cream' || p.nameAr.includes('كريم') || p.nameAr.includes('مرطب');
-        if (activeCategory === 'face') return p.category === 'cleanser' || p.category === 'toner' || p.category === 'serum';
+        if (activeCategory === 'moisturizer') return p.category === 'moisturizer' || p.category === 'mask' || p.nameAr.includes('كريم') || p.nameAr.includes('ماسك');
+        if (activeCategory === 'under-200') return p.price < 200 || p.isUnder200;
         return true;
       });
 
@@ -200,11 +197,11 @@ export default function App() {
   const wishlistProducts = PRODUCTS.filter((p) => wishlistIds.includes(p.id));
 
   return (
-    <div className="min-h-screen bg-[#E5EFE8] flex justify-center selection:bg-[#EAF5EF] selection:text-[#1F5E4B]">
-      {/* Responsive Canvas Container */}
-      <div className="w-full max-w-5xl bg-[#EDF3EE] min-h-screen shadow-xl relative flex flex-col pb-28 md:pb-12 border-x border-emerald-950/10">
+    <div className="min-h-screen bg-[#F7F9F8] flex justify-center selection:bg-emerald-100 selection:text-[#1F5E4B] w-full max-w-full overflow-x-hidden">
+      {/* Responsive Canvas Container with High-End Whitespace */}
+      <div className="w-full max-w-5xl bg-white min-h-screen shadow-sm relative flex flex-col pb-12 border-x border-slate-100 overflow-x-hidden">
         
-        {/* Top Header with Greeting, Search & Category Pills */}
+        {/* Top Header */}
         <Header
           cartCount={totalCartCount}
           wishlistCount={wishlistIds.length}
@@ -212,11 +209,9 @@ export default function App() {
           activeCategory={activeCategory}
           onTabChange={(tab) => {
             setActiveTab(tab);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           onSelectCategory={(cat) => {
             setActiveCategory(cat);
-            handleScrollToSection('bestsellers-section');
           }}
           onOpenCart={() => setIsCartOpen(true)}
           onOpenSearch={() => setIsSearchOpen(true)}
@@ -235,65 +230,55 @@ export default function App() {
         )}
 
         {/* MAIN BODY CONTENT */}
-        <main className="flex-1">
+        <main className="flex-1 space-y-4 sm:space-y-8">
           {activeTab === 'home' && (
             <>
-              {/* 1. RESULT-FOCUSED MOROCCAN HERO */}
+              {/* 1. HERO — Full-width Campaign Visual with Direct CTA */}
               <HeroSection
-                onStartDiagnosis={() => setIsAIModalOpen(true)}
-                onExploreFatima={() => handleScrollToSection('routine-section')}
+                onDiscoverRoseBerry={() => handleScrollToSection('rose-berry-showcase')}
+                onDiscoverGifts={() => handleScrollToSection('gift-bundles-section')}
               />
 
-              {/* 2. REASSURANCE TRUST BENEFITS (6 Points) */}
-              <TrustBenefits />
-
-              {/* 3. SKIN CONCERN DISCOVERY (5 Moroccan Concerns) */}
-              <div id="concerns-section">
-                <SkinConcernSection
-                  isLoading={isLoading}
-                  onSelectProduct={(p) => setSelectedProduct(p)}
-                  onAddToCart={(p) => handleAddToCart(p, 1, true)}
-                  onConsultAI={() => setIsAIModalOpen(true)}
-                />
-              </div>
-
-              {/* 4. BELMO AI 3-STEP SHOPPING ADVISOR */}
-              <BelmoAISection
-                onOpenAI={() => setIsAIModalOpen(true)}
+              {/* 2. TRUST BAR — Clean Reassurance Strip */}
+              <TrustBarStrip
+                onWatchVideos={() => handleScrollToSection('fatima-videos-section')}
               />
 
-              {/* 5. FATIMA'S INSTAGRAM STORY DISCOVERY REEL */}
-              <div id="fatima-why-section">
-                <FatimaWhyBelmo
-                  onPlayVideo={() => setIsStoryModalOpen(true)}
-                  onScrollToRoutine={() => handleScrollToSection('routine-section')}
-                />
-              </div>
+              {/* 3. 🌟 ROSE BERRY SHOWCASE — Official 6 Products Spotlight */}
+              <RoseBerryHeroShowcase
+                wishlistIds={wishlistIds}
+                onToggleWishlist={handleToggleWishlist}
+                onAddToCart={(p) => handleAddToCart(p, 1, true)}
+                onSelectProduct={(p) => setSelectedProduct(p)}
+                onScrollToAll={() => handleScrollToSection('kbeauty-new-section')}
+              />
 
-              {/* 6. FATIMA'S 4-STEP MOROCCAN ROUTINE BUNDLE */}
-              <div id="routine-section">
-                <FatimasRoutine
-                  isLoading={isLoading}
-                  onAddRoutineBundle={handleAddRoutineBundle}
-                  onSelectStepProduct={(step: RoutineStep) => {
-                    const matched = PRODUCTS.find((p) => p.nameAr.includes(step.brand) || p.brand === step.brand) || PRODUCTS[0];
-                    setSelectedProduct(matched);
-                  }}
-                  onAddToCart={(p) => handleAddToCart(p, 1, true)}
-                  onSelectProduct={(p) => setSelectedProduct(p)}
-                />
-              </div>
-
-              {/* 7. INTERACTIVE BEFORE / AFTER SKIN TRANSFORMATION SLIDER (Section 11) */}
-              <BeforeAfterSlider />
-
-              {/* 8. SWIPE-TO-DISCOVER SOCIAL EXPERIENCE (Section 15) */}
-              <SwipeToDiscover
+              {/* 4. 🎬 FATIMA EZZAHRA VIDEO REELS & REVIEWS */}
+              <FatimaVideoSection
                 onAddToCart={(p) => handleAddToCart(p, 1, true)}
                 onSelectProduct={(p) => setSelectedProduct(p)}
               />
 
-              {/* 9. BEST SELLERS & FILTERED PICKS */}
+              {/* 5. GIFT BUNDLES — Curated Luxury Sets */}
+              <GiftBundlesSection
+                onAddGiftBundle={handleAddGiftBundleObject}
+              />
+
+              {/* 6. ROUTINES — Clinical Protocols */}
+              <RoutinesSection
+                onAddRoutine={handleAddCuratedRoutine}
+                onSelectProduct={(p) => setSelectedProduct(p)}
+              />
+
+              {/* 7. K-BEAUTY EDIT — Seoul Viral Trends */}
+              <KBeautyNewInSection
+                wishlistIds={wishlistIds}
+                onToggleWishlist={handleToggleWishlist}
+                onAddToCart={(p) => handleAddToCart(p, 1, true)}
+                onSelectProduct={(p) => setSelectedProduct(p)}
+              />
+
+              {/* 8. COMPLETE PRODUCT CATALOG */}
               <div id="bestsellers-section">
                 <BestsellersSection
                   products={filteredProducts}
@@ -306,53 +291,17 @@ export default function App() {
                 />
               </div>
 
-              {/* 10. BUILD ROUTINE BY BUDGET (150 / 300 / 500+ DH) */}
-              <BuildRoutineByBudget
-                onAddRoutine={handleAddRoutineList}
-              />
-
-              {/* 9. UNDER 200 DH ENTRY-LEVEL PICKS */}
-              <div id="under200-section">
-                <Under200Section
-                  products={PRODUCTS}
-                  wishlistIds={wishlistIds}
-                  isLoading={isLoading}
-                  onToggleWishlist={handleToggleWishlist}
-                  onAddToCart={(p) => handleAddToCart(p, 1, true)}
-                  onSelectProduct={(p) => setSelectedProduct(p)}
-                  onViewAll={() => setIsSearchOpen(true)}
-                />
-              </div>
-
-              {/* 10. LUXURY CADEAU / GIFTS SECTION */}
-              <div id="gifts-section">
-                <GiftsSection
-                  onAddGiftBox={handleAddGiftBox}
-                  onExploreGifts={() => setIsSearchOpen(true)}
-                />
-              </div>
-
-              {/* 11. WHATSAPP REAL AUDIO & CHAT TESTIMONIALS + CONVERSION CTA */}
+              {/* 9. CUSTOMER TESTIMONIALS & AUDIO NOTES */}
               <div id="testimonials-section">
                 <WhatsAppTestimonialsSection
                   onOpenConsultation={() => setIsAIModalOpen(true)}
                 />
               </div>
 
-              {/* 12. TOMBOLA VIP REWARD DISCOVERY */}
-              <div id="tombla-section">
-                <TomblaSection
-                  onOpenTomblaModal={() => setIsTomblaModalOpen(true)}
-                  onApplyGiftCode={(code) => {
-                    showToast(`مبروك! تم تفعيل كود الهدية: ${code}`, 'gift');
-                  }}
-                />
-              </div>
-
-              {/* 13. TRUST REASSURANCE STRIP */}
+              {/* 8. TRUST REASSURANCE */}
               <TrustReassuranceStrip />
 
-              {/* 14. NEWSLETTER */}
+              {/* 9. NEWSLETTER */}
               <NewsletterSection />
             </>
           )}
@@ -375,34 +324,8 @@ export default function App() {
           )}
         </main>
 
-        {/* STICKY BOTTOM CART BAR (Shows when items > 0) */}
-        <StickyBottomCart
-          items={cartItems}
-          onOpenCart={() => setIsCartOpen(true)}
-        />
-
-        {/* FLOATING ACTIONS (WhatsApp quick chat) */}
+        {/* FLOATING ACTIONS */}
         <FloatingActions />
-
-        {/* CAPSULE ISLAND BOTTOM NAVIGATION */}
-        <BottomNav
-          activeTab={activeTab}
-          onSelectTab={(tab) => {
-            if (tab === 'scan') {
-              setIsAIModalOpen(true);
-            } else if (tab === 'cart') {
-              setIsCartOpen(true);
-            } else if (tab === 'routine') {
-              handleScrollToSection('routine-section');
-            } else {
-              setActiveTab(tab);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-          }}
-          cartCount={totalCartCount}
-          wishlistCount={wishlistIds.length}
-          onOpenScanner={() => setIsAIModalOpen(true)}
-        />
 
         {/* INSTANT ADDED TO CART UPSELL BOTTOM SHEET */}
         <InstantAddedSheet
@@ -453,14 +376,6 @@ export default function App() {
           }}
         />
 
-        <TomblaModal
-          isOpen={isTomblaModalOpen}
-          onClose={() => setIsTomblaModalOpen(false)}
-          onApplyGiftCode={(code) => {
-            showToast(`مبروك! تم تفعيل كود الهدية: ${code}`, 'gift');
-          }}
-        />
-
         <BelmoAIModal
           isOpen={isAIModalOpen}
           onClose={() => setIsAIModalOpen(false)}
@@ -472,14 +387,6 @@ export default function App() {
           }}
         />
 
-        <VideoModal
-          video={activeVideo}
-          isOpen={!!activeVideo}
-          onClose={() => setActiveVideo(null)}
-          onSelectProduct={(p) => setSelectedProduct(p)}
-          onAddToCart={(p) => handleAddToCart(p, 1, true)}
-        />
-
         <ProductQuickViewModal
           product={selectedProduct}
           isOpen={!!selectedProduct}
@@ -487,14 +394,6 @@ export default function App() {
           isWishlisted={selectedProduct ? wishlistIds.includes(selectedProduct.id) : false}
           onToggleWishlist={handleToggleWishlist}
           onAddToCartWithQty={handleAddToCart}
-        />
-
-        {/* Instagram-Style Story Modal (Section 3) */}
-        <InstagramStoryModal
-          isOpen={isStoryModalOpen}
-          onClose={() => setIsStoryModalOpen(false)}
-          onAddToCart={(p) => handleAddToCart(p, 1, true)}
-          onSelectProduct={(p) => setSelectedProduct(p)}
         />
       </div>
     </div>

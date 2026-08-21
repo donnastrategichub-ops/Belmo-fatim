@@ -27,22 +27,28 @@ export const SearchModal = ({
 
   const popularTags = [
     'اختيارات فاطمة',
+    'ROSE BERRY',
     'ANUA',
+    'DR. ALTHEA',
     'BEAUTY OF JOSEON',
-    'COSRX',
+    'SKIN1004',
+    'MEDICUBE',
+    'كوفري برستيج',
+    '345 ريليف',
     'واقي شمس',
-    'سيروم النضارة',
-    'حب الشباب',
-    'سنتيلا',
+    'سيروم التوهج',
+    'نياسيناميد TXA',
   ];
 
   const categories = [
     { id: 'all', label: 'الكل' },
-    { id: 'cleanser', label: 'تنظيف' },
+    { id: 'korean', label: 'كوري 🇰🇷' },
+    { id: 'rose-berry', label: 'روز بيري 🇦🇪' },
     { id: 'serum', label: 'سيرومات' },
-    { id: 'moisturizer', label: 'ترطيب' },
+    { id: 'cleanser', label: 'غسول وتنظيف' },
+    { id: 'moisturizer', label: 'ترطيب وترميم' },
     { id: 'sunscreen', label: 'واقي شمس' },
-    { id: 'toner', label: 'تونر' },
+    { id: 'makeup', label: 'مكياج وهدايا' },
   ];
 
   const processedProducts = useMemo(() => {
@@ -60,7 +66,15 @@ export const SearchModal = ({
 
     // 2. Filter by Category
     if (selectedCategory !== 'all') {
-      list = list.filter((p) => p.category === selectedCategory);
+      if (selectedCategory === 'korean') {
+        list = list.filter((p) => p.brand !== 'ROSE BERRY');
+      } else if (selectedCategory === 'rose-berry') {
+        list = list.filter((p) => p.brand === 'ROSE BERRY');
+      } else if (selectedCategory === 'makeup') {
+        list = list.filter((p) => p.category === 'makeup' || p.category === 'gift');
+      } else {
+        list = list.filter((p) => p.category === selectedCategory);
+      }
     }
 
     // 3. Sort by chosen SortOption

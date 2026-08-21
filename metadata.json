@@ -1,6 +1,6 @@
 {
-  "name": "Remix Belmo — K-Beauty Maroc",
-  "description": "High-fidelity mobile ecommerce homepage for Belmo, Moroccan K-Beauty platform featuring Fatima\u0027s curated picks, skincare routines, and smart consultation.",
+  "name": "Belmo — Fatima Ezzahra Campaign Edition",
+  "description": "High-conversion Moroccan K-Beauty campaign homepage for Fatima Ezzahra Lahrech, featuring curated gift sets, clinical skincare routines, new K-Beauty arrivals, and instant COD checkout.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

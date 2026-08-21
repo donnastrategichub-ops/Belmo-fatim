@@ -59,6 +59,50 @@ export interface CartItem {
   quantity: number;
 }
 
+export interface GiftBundle {
+  id: string;
+  nameAr: string;
+  nameEn: string;
+  taglineAr: string;
+  price: number;
+  originalPrice: number;
+  savings: number;
+  rating: number;
+  reviewsCount: number;
+  image: string;
+  badgeAr: string;
+  ribbonColor: string;
+  productsIncluded: {
+    brand: string;
+    nameAr: string;
+    categoryAr: string;
+  }[];
+  perksAr: string[];
+  productIds: string[];
+}
+
+export interface CuratedRoutine {
+  id: string;
+  nameAr: string;
+  nameEn: string;
+  targetSkinAr: string;
+  stepsCount: number;
+  price: number;
+  originalPrice: number;
+  savings: number;
+  badgeAr: string;
+  clinicalNoteAr: string;
+  steps: {
+    number: number;
+    stepTypeAr: string;
+    brand: string;
+    productNameAr: string;
+    activeIngredient: string;
+    image: string;
+  }[];
+  productIds: string[];
+}
+
 export interface SkinConcern {
   id: string;
   titleAr: string;
