@@ -58,10 +58,10 @@ export const GiftBundlesSection = ({ onAddGiftBundle }: GiftBundlesSectionProps)
                 <div
                   key={bundle.id}
                   id={`gift-card-${bundle.id}`}
-                  className={`w-[85vw] sm:w-[350px] md:w-[370px] shrink-0 snap-start rounded-[24px] bg-white border ${
+                  className={`w-[85vw] sm:w-[350px] md:w-[370px] shrink-0 snap-start rounded-2xl bg-white border ${
                     isFeatured
-                      ? 'border-rose-200 shadow-[0_8px_30px_rgba(255,77,109,0.08)] ring-1 ring-rose-200'
-                      : 'border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)]'
+                      ? 'border-rose-200 shadow-md ring-1 ring-rose-200'
+                      : 'border-slate-100 shadow-xs'
                   } p-4 sm:p-5 flex flex-col justify-between transition-all`}
                 >
                   {/* Top Ribbon & Savings */}
@@ -74,28 +74,28 @@ export const GiftBundlesSection = ({ onAddGiftBundle }: GiftBundlesSectionProps)
                       <span>{bundle.badgeAr}</span>
                     </span>
 
-                    <div className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                    <div className="inline-flex items-center gap-1 text-xs font-bold text-[#1F5E4B] bg-[#F0F7F4] border border-emerald-200 px-2.5 py-0.5 rounded-full">
                       <span>وفري {bundle.savings} DH</span>
                     </div>
                   </div>
 
                   {/* Bundle Visual & Info */}
                   <div className="space-y-3">
-                    <div className="relative w-full h-44 sm:h-48 rounded-2xl overflow-hidden bg-slate-50 border border-slate-100 p-2">
+                    <div className="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden bg-slate-50 border border-slate-100 p-2">
                       <img
                         src={bundle.image}
                         alt={bundle.nameAr}
-                        className="w-full h-full object-cover rounded-xl"
+                        className="w-full h-full object-cover rounded-lg"
                         loading="lazy"
                         referrerPolicy="no-referrer"
                       />
                     </div>
 
                     <div>
-                      <h3 className="text-base font-black text-slate-900 leading-snug">
+                      <h3 className="text-base font-bold text-slate-900 leading-snug">
                         {bundle.nameAr}
                       </h3>
-                      <p className="text-xs text-slate-500 mt-1 leading-relaxed line-clamp-2">
+                      <p className="text-xs text-slate-600 mt-1 leading-relaxed line-clamp-2">
                         {bundle.taglineAr}
                       </p>
                     </div>
@@ -108,7 +108,7 @@ export const GiftBundlesSection = ({ onAddGiftBundle }: GiftBundlesSectionProps)
                       {bundle.productsIncluded.map((item, idx) => (
                         <div key={idx} className="flex items-center justify-between text-xs font-medium text-slate-700">
                           <span className="truncate max-w-[200px]">{item.nameAr}</span>
-                          <span className="text-[10px] font-latin font-bold text-[#1F5E4B] bg-emerald-50 px-1.5 py-0.5 rounded shrink-0">
+                          <span className="text-[10px] font-latin font-bold text-[#1F5E4B] bg-[#F0F7F4] px-1.5 py-0.5 rounded shrink-0">
                             {item.brand}
                           </span>
                         </div>
@@ -119,7 +119,7 @@ export const GiftBundlesSection = ({ onAddGiftBundle }: GiftBundlesSectionProps)
                     <div className="grid grid-cols-2 gap-1.5 pt-1">
                       {bundle.perksAr.slice(0, 2).map((perk, idx) => (
                         <div key={idx} className="flex items-center gap-1 text-[10.5px] text-slate-600 font-medium">
-                          <Check className="w-3 h-3 text-emerald-600 shrink-0" />
+                          <Check className="w-3 h-3 text-[#1F5E4B] shrink-0" />
                           <span className="truncate">{perk}</span>
                         </div>
                       ))}
@@ -130,14 +130,14 @@ export const GiftBundlesSection = ({ onAddGiftBundle }: GiftBundlesSectionProps)
                   <div className="pt-4 border-t border-slate-100 mt-4 space-y-2.5">
                     <div className="flex items-baseline justify-between">
                       <div className="flex items-baseline gap-1.5 font-latin">
-                        <span className="text-xl sm:text-2xl font-black text-slate-900">
+                        <span className="text-xl sm:text-2xl font-black text-[#1F5E4B]">
                           {bundle.price} DH
                         </span>
                         <span className="text-xs text-slate-400 line-through">
                           {bundle.originalPrice} DH
                         </span>
                       </div>
-                      <span className="text-[11px] font-bold text-emerald-600 flex items-center gap-1">
+                      <span className="text-[11px] font-bold text-[#1F5E4B] flex items-center gap-1">
                         <Truck className="w-3.5 h-3.5" />
                         <span>توصيل مجاني</span>
                       </span>

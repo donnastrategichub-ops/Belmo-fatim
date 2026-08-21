@@ -52,7 +52,7 @@ export const WhatsAppTestimonialsSection = ({
             <Sparkles className="w-3.5 h-3.5 text-amber-500" />
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
             رسائل وأوديوات زبوناتنا عبر واتساب
           </h2>
 
@@ -68,10 +68,10 @@ export const WhatsAppTestimonialsSection = ({
                   <Star key={s} className="w-3.5 h-3.5 fill-amber-400" />
                 ))}
               </div>
-              <span className="font-bold text-slate-900 mr-1">4.9 / 5</span>
-              <span className="text-slate-400">(+4,800 طلبية موثقة)</span>
+              <span className="font-bold text-slate-900 mr-1 font-latin">4.9 / 5</span>
+              <span className="text-slate-400 font-latin">(+4,800 طلبية موثقة)</span>
             </div>
-            <div className="hidden xs:flex items-center gap-1 text-emerald-700 bg-emerald-100/60 px-2.5 py-0.5 rounded-full text-[10px] font-bold">
+            <div className="hidden xs:flex items-center gap-1 text-[#1F5E4B] bg-[#F0F7F4] border border-emerald-200/60 px-2.5 py-0.5 rounded-full text-[10px] font-bold">
               <CheckCheck className="w-3.5 h-3.5" />
               <span>أصالة المنتجات مضمونة 100%</span>
             </div>
@@ -82,10 +82,10 @@ export const WhatsAppTestimonialsSection = ({
         <div className="w-full max-w-full overflow-x-auto no-scrollbar py-1.5 mb-6 flex items-center justify-start sm:justify-center gap-2 px-1">
           <button
             onClick={() => setActiveFilter('all')}
-            className={`min-h-[44px] px-4 py-2 rounded-full text-xs font-bold transition-all shrink-0 flex items-center gap-2 touch-manipulation ${
+            className={`min-h-[40px] px-4 py-2 rounded-full text-xs font-bold transition-all shrink-0 flex items-center gap-2 cursor-pointer ${
               activeFilter === 'all'
-                ? 'bg-[#1F5E4B] text-white shadow-xs'
-                : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                ? 'bg-[#1F5E4B] text-white shadow-xs font-black'
+                : 'bg-white text-slate-700 hover:bg-slate-50 border border-slate-200'
             }`}
           >
             <span>جميع التجارب</span>
@@ -96,14 +96,14 @@ export const WhatsAppTestimonialsSection = ({
 
           <button
             onClick={() => setActiveFilter('audio')}
-            className={`min-h-[44px] px-4 py-2 rounded-full text-xs font-bold transition-all shrink-0 flex items-center gap-2 touch-manipulation ${
+            className={`min-h-[40px] px-4 py-2 rounded-full text-xs font-bold transition-all shrink-0 flex items-center gap-2 cursor-pointer ${
               activeFilter === 'audio'
-                ? 'bg-[#25D366] text-white shadow-xs'
-                : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                ? 'bg-[#1F5E4B] text-white shadow-xs font-black'
+                : 'bg-white text-slate-700 hover:bg-slate-50 border border-slate-200'
             }`}
           >
             <Mic className="w-4 h-4" />
-            <span>رسائل صوتية (Voice Notes)</span>
+            <span>تسجيلات صوتية</span>
             <span className={`text-[10.5px] font-latin font-bold px-2 py-0.5 rounded-full ${activeFilter === 'audio' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'}`}>
               {audioCount}
             </span>
@@ -111,10 +111,10 @@ export const WhatsAppTestimonialsSection = ({
 
           <button
             onClick={() => setActiveFilter('screenshot')}
-            className={`min-h-[44px] px-4 py-2 rounded-full text-xs font-bold transition-all shrink-0 flex items-center gap-2 touch-manipulation ${
+            className={`min-h-[40px] px-4 py-2 rounded-full text-xs font-bold transition-all shrink-0 flex items-center gap-2 cursor-pointer ${
               activeFilter === 'screenshot'
-                ? 'bg-[#075E54] text-white shadow-xs'
-                : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                ? 'bg-[#1F5E4B] text-white shadow-xs font-black'
+                : 'bg-white text-slate-700 hover:bg-slate-50 border border-slate-200'
             }`}
           >
             <MessageSquare className="w-4 h-4" />
@@ -133,7 +133,7 @@ export const WhatsAppTestimonialsSection = ({
             return (
               <div
                 key={testimonial.id}
-                className="w-full bg-white rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between min-w-0 overflow-hidden"
+                className="w-full bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between min-w-0 overflow-hidden"
               >
                 {/* Header of the Card */}
                 <div className="min-w-0">

@@ -1,4 +1,5 @@
-import { Search, SlidersHorizontal, LayoutGrid, ShoppingBag } from 'lucide-react';
+import React from 'react';
+import { Search, Menu, ShoppingBag, Heart } from 'lucide-react';
 
 interface HeaderProps {
   cartCount: number;
@@ -10,139 +11,141 @@ interface HeaderProps {
   onOpenCart: () => void;
   onOpenSearch: () => void;
   onOpenMenu: () => void;
-  onOpenFilter?: () => void;
-  onOpenScanner?: () => void;
 }
 
-export const Header = ({
+export const Header: React.FC<HeaderProps> = ({
   cartCount,
+  wishlistCount,
   activeCategory = 'all',
   onTabChange,
   onSelectCategory,
   onOpenCart,
   onOpenSearch,
   onOpenMenu,
-  onOpenFilter,
-}: HeaderProps) => {
+}) => {
   const categories = [
     { id: 'all', labelAr: 'الكل' },
-    { id: 'korean-skin', labelAr: 'العناية الكورية 🇰🇷' },
-    { id: 'rose-berry', labelAr: 'مكياج روز بيري 🇦🇪' },
-    { id: 'gift-sets', labelAr: 'بوكسات وكوفريات 🎁' },
-    { id: 'serums', labelAr: 'سيرومات' },
-    { id: 'cleanser', labelAr: 'غسول وتنظيف' },
-    { id: 'sunscreen', labelAr: 'واقي شمس' },
-    { id: 'moisturizer', labelAr: 'ترطيب وترميم' },
-    { id: 'under-200', labelAr: 'أقل من 200 DH' },
+    { id: 'rose-berry', labelAr: 'Rose Berry 🇦🇪' },
+    { id: 'fatima-picks', labelAr: 'روتين فاطمة ✨' },
+    { id: 'korean-skin', labelAr: 'العناية الكورية 🌿' },
+    { id: 'routines', labelAr: 'البروتوكولات والعناية' },
+    { id: 'gift-sets', labelAr: 'بوكسات الهدايا 🎁' },
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-[#EDF3EE]/95 backdrop-blur-md border-b border-emerald-950/5 w-full max-w-full">
-      <div className="w-full max-w-5xl mx-auto px-3 sm:px-4 py-2 space-y-2">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 w-full max-w-full">
+      <div className="w-full max-w-5xl mx-auto px-3 sm:px-5 pt-3 pb-2 space-y-2">
         
-        {/* ROW 1: Compact Top Bar (Menu + Fatima's Glow + Belmo Logo + Cart Icon) */}
-        <div className="flex items-center justify-between gap-2">
+        {/* TOP ROW: Brand Identity, Search Access & Action Icons */}
+        <div className="flex items-center justify-between gap-3">
           
-          {/* Right Side (RTL): Menu Drawer & Ambassador Greeting */}
-          <div className="flex items-center gap-2 min-w-0">
+          {/* Menu Trigger & Brand Logo */}
+          <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
             <button
+              type="button"
               onClick={onOpenMenu}
               aria-label="القائمة الرئيسية"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-emerald-950/5 text-slate-800 flex items-center justify-center shadow-2xs hover:bg-slate-50 active:scale-95 transition-all shrink-0 cursor-pointer"
+              className="w-9 h-9 rounded-xl hover:bg-slate-100 active:scale-95 text-slate-800 flex items-center justify-center transition-colors cursor-pointer"
             >
-              <LayoutGrid className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2]" />
+              <Menu className="w-5 h-5 stroke-[2]" />
             </button>
 
-            <div className="min-w-0 text-right">
-              <div className="flex items-center gap-1">
-                <span className="text-xs sm:text-sm font-bold text-slate-500 font-latin">Hello</span>
-                <span className="text-xs sm:text-sm font-black text-slate-900 font-latin truncate">Fatima's Glow</span>
-                <span className="text-[#FF6B81] text-xs">✨</span>
-              </div>
-              <p className="text-[10px] text-slate-500 font-arabic leading-none truncate hidden sm:block">
-                عناية كورية أصلية 100%
-              </p>
-            </div>
-          </div>
-
-          {/* Left Side (RTL): Brand Logo & Header Cart Access with Badge */}
-          <div className="flex items-center gap-2 shrink-0">
-            {/* Brand Logo */}
+            {/* Belmo Logo */}
             <div
               onClick={() => onTabChange('home')}
-              className="cursor-pointer select-none px-1 flex items-center"
+              className="cursor-pointer select-none flex items-baseline group"
               role="button"
               tabIndex={0}
             >
-              <span className="font-latin tracking-tight text-xl sm:text-2xl font-black text-[#1F5E4B] lowercase">
+              <span className="font-latin tracking-tight text-2xl font-black text-[#1F5E4B] lowercase">
                 belmo
               </span>
-              <span className="text-[#FF6B81] text-base font-bold -mt-2 mr-0.5">⁺</span>
+              <span className="text-[#FF4D6D] text-sm font-black -mt-1 mr-0.5">.</span>
             </div>
+          </div>
 
-            {/* Header Cart Icon (Tappable with clear count badge) */}
+          {/* Desktop Search Bar (Mid & Large screens) */}
+          <div className="hidden md:flex flex-1 max-w-md mx-2">
             <button
-              onClick={onOpenCart}
-              aria-label={`سلة التسوق (${cartCount} منتجات)`}
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-emerald-950/10 text-[#1F5E4B] flex items-center justify-center relative shadow-2xs hover:bg-slate-50 active:scale-95 transition-all cursor-pointer shrink-0"
+              type="button"
+              onClick={onOpenSearch}
+              aria-label="بحث في المنتجات"
+              className="w-full h-9 bg-slate-50 hover:bg-slate-100 border border-slate-200/70 rounded-xl px-3.5 flex items-center justify-between gap-2 cursor-pointer transition-colors text-right"
             >
-              <ShoppingBag className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.2]" />
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#FF4D6D] text-white text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center font-latin border-2 border-white shadow-2xs">
-                  {cartCount}
+              <div className="flex items-center gap-2 text-slate-400 min-w-0">
+                <Search className="w-3.5 h-3.5 shrink-0 text-slate-400" />
+                <span className="text-xs text-slate-500 font-medium truncate">
+                  ابحثي في Rose Berry، العناية الكورية، البوكسات...
                 </span>
-              )}
+              </div>
             </button>
           </div>
+
+          {/* Actions: Search (Mobile), Wishlist & Shopping Cart */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {/* Mobile Search Button */}
+            <button
+              type="button"
+              onClick={onOpenSearch}
+              aria-label="بحث"
+              className="md:hidden w-9 h-9 rounded-xl hover:bg-slate-100 active:scale-95 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
+            >
+              <Search className="w-4.5 h-4.5 stroke-[2]" />
+            </button>
+
+            {/* Wishlist Icon */}
+            <button
+              type="button"
+              onClick={() => onTabChange('wishlist')}
+              aria-label="المفضلة"
+              className="w-9 h-9 rounded-xl hover:bg-slate-100 active:scale-95 text-slate-700 flex items-center justify-center relative transition-colors cursor-pointer"
+            >
+              <Heart className="w-4.5 h-4.5 stroke-[2]" />
+              {wishlistCount > 0 && (
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#FF4D6D] ring-2 ring-white" />
+              )}
+            </button>
+
+            {/* Shopping Bag / Cart Button */}
+            <button
+              type="button"
+              onClick={onOpenCart}
+              aria-label={`سلة التسوق (${cartCount} منتجات)`}
+              className="min-h-[36px] px-3 rounded-xl bg-[#1F5E4B] hover:bg-[#164336] text-white flex items-center justify-center gap-1.5 relative active:scale-95 transition-all cursor-pointer"
+            >
+              <ShoppingBag className="w-4 h-4 stroke-[2]" />
+              <span className="text-xs font-bold font-latin">{cartCount}</span>
+            </button>
+          </div>
+
         </div>
 
-        {/* ROW 2: Responsive Full-Width Search & Filter Bar */}
-        <div className="flex items-center gap-2 w-full">
-          <button
-            type="button"
-            onClick={onOpenSearch}
-            aria-label="بحث في المنتجات"
-            className="flex-1 min-h-[40px] sm:min-h-[42px] bg-white border border-emerald-950/5 hover:border-emerald-950/20 rounded-full px-3.5 flex items-center gap-2 cursor-pointer shadow-2xs transition-colors text-right min-w-0"
-          >
-            <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400 shrink-0" />
-            <span className="text-xs text-slate-400 flex-1 truncate font-arabic">
-              ابحثي عن منتجات أصلية، سيرومات، أو روتينك...
-            </span>
-          </button>
-
-          {/* Filter Button */}
-          <button
-            type="button"
-            onClick={onOpenFilter || onOpenSearch}
-            aria-label="تصفية"
-            className="min-h-[40px] sm:min-h-[42px] px-3.5 bg-white border border-emerald-950/5 rounded-full text-xs font-bold text-slate-700 flex items-center gap-1 shadow-2xs hover:bg-slate-50 active:scale-95 transition-all shrink-0 cursor-pointer"
-          >
-            <SlidersHorizontal className="w-3.5 h-3.5" />
-            <span className="text-xs">تصفية</span>
-          </button>
-        </div>
-
-        {/* ROW 3: Horizontal Category Chips (Contained scroll container, zero page overflow) */}
-        <div className="w-full overflow-x-auto no-scrollbar flex items-center gap-1.5 pt-0.5 pb-0.5">
+        {/* HORIZONTAL CATEGORY SCROLL NAVIGATION */}
+        <nav
+          aria-label="فئات المنتجات"
+          className="w-full overflow-x-auto no-scrollbar flex items-center gap-1.5 pt-1 pb-1"
+        >
           {categories.map((cat) => {
             const isActive = activeCategory === cat.id;
             return (
               <button
                 key={cat.id}
+                type="button"
                 onClick={() => onSelectCategory && onSelectCategory(cat.id)}
-                className={`px-3.5 py-1 sm:py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shadow-2xs cursor-pointer shrink-0 ${
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer shrink-0 ${
                   isActive
-                    ? 'bg-[#162A22] text-white shadow-xs'
-                    : 'bg-white/80 hover:bg-white text-slate-600 border border-emerald-950/5'
+                    ? 'bg-[#1F5E4B] text-white shadow-2xs font-black'
+                    : 'bg-slate-100/80 hover:bg-slate-200/70 text-slate-700'
                 }`}
               >
                 <span>{cat.labelAr}</span>
               </button>
             );
           })}
-        </div>
+        </nav>
 
       </div>
     </header>
   );
 };
+

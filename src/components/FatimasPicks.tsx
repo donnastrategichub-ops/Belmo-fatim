@@ -62,16 +62,16 @@ export const FatimasPicks = ({
           </button>
         </div>
 
-        {/* 1. Featured "For You" Luxury Horizontal Card (Exact match to Screen 2 in image) */}
+        {/* 1. Featured "For You" Luxury Horizontal Card */}
         {featuredProduct && !isLoading && (
           <div
             onClick={() => onSelectProduct(featuredProduct)}
-            className="bg-white rounded-[28px] p-5 border border-emerald-950/5 shadow-[0_8px_30px_rgb(31,94,75,0.04)] relative overflow-hidden cursor-pointer hover:shadow-md transition-all group"
+            className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-100 shadow-2xs relative overflow-hidden cursor-pointer hover:shadow-md transition-all group"
           >
             {/* Top row: Brand + Wishlist */}
             <div className="flex items-center justify-between gap-2 mb-2">
               <div className="flex items-center gap-1.5">
-                <span className="bg-[#EAF5EF] text-[#1F5E4B] text-[10px] font-bold px-2.5 py-0.5 rounded-full font-latin uppercase">
+                <span className="bg-[#F0F7F4] text-[#1F5E4B] text-[10px] font-bold px-2.5 py-0.5 rounded-full font-latin uppercase">
                   {featuredProduct.brand}
                 </span>
                 <span className="bg-[#FFF0F3] text-[#FF4D6D] text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
@@ -87,10 +87,10 @@ export const FatimasPicks = ({
                   onToggleWishlist(featuredProduct);
                 }}
                 aria-label="المفضلة"
-                className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors shadow-2xs ${
+                className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors shadow-2xs ${
                   isFeaturedWishlisted
                     ? 'bg-[#FFF0F3] text-[#FF4D6D]'
-                    : 'bg-[#F8FAF8] text-slate-400 hover:text-slate-700 hover:bg-slate-100'
+                    : 'bg-slate-50 text-slate-400 hover:text-slate-700 hover:bg-slate-100'
                 }`}
               >
                 <Heart
@@ -104,13 +104,13 @@ export const FatimasPicks = ({
             <div className="flex items-center justify-between gap-4">
               {/* Product Info */}
               <div className="flex-1 space-y-2 text-right">
-                <h3 className="text-base sm:text-lg font-black text-slate-900 line-clamp-2 leading-tight group-hover:text-[#1F5E4B] transition-colors">
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 line-clamp-2 leading-tight group-hover:text-[#1F5E4B] transition-colors">
                   {featuredProduct.nameAr}
                 </h3>
                 
                 {/* Reassurance point */}
                 <div className="flex items-center gap-2 text-[11px] text-slate-500">
-                  <span className="flex items-center gap-1 text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md font-medium">
+                  <span className="flex items-center gap-1 text-[#1F5E4B] bg-[#F0F7F4] px-2 py-0.5 rounded-md font-medium">
                     <ShieldCheck className="w-3 h-3 text-[#1F5E4B]" />
                     <span>كوري أصلي 100%</span>
                   </span>
@@ -130,14 +130,14 @@ export const FatimasPicks = ({
                   )}
                 </div>
 
-                {/* Buy Now CTA (Exact style from Screen 2 in image) */}
+                {/* Buy Now CTA */}
                 <div className="pt-2">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       onAddToCart(featuredProduct);
                     }}
-                    className="bg-[#162A22] hover:bg-[#1F5E4B] text-white font-bold text-xs sm:text-sm py-2.5 px-5 rounded-full flex items-center gap-2 shadow-xs active:scale-95 transition-all"
+                    className="bg-slate-900 hover:bg-[#1F5E4B] text-white font-bold text-xs sm:text-sm py-2.5 px-5 rounded-xl flex items-center gap-2 shadow-2xs active:scale-95 transition-all cursor-pointer"
                   >
                     <ShoppingBag className="w-3.5 h-3.5" />
                     <span>أضيفي للسلة الآن</span>
@@ -146,11 +146,11 @@ export const FatimasPicks = ({
               </div>
 
               {/* Product Packshot Visual with Botanical Element */}
-              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl bg-gradient-to-br from-[#F4FAF6] to-[#E8F3ED] p-2 flex items-center justify-center shrink-0 border border-emerald-950/5 relative overflow-hidden">
+              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-xl bg-[#F0F7F4]/60 p-2 flex items-center justify-center shrink-0 border border-slate-100 relative overflow-hidden">
                 <img
                   src={featuredProduct.image}
                   alt={featuredProduct.nameAr}
-                  className="w-full h-full object-contain mix-blend-multiply group-hover:scale-108 transition-transform duration-300"
+                  className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
             </div>

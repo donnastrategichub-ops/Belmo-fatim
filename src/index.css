@@ -2,13 +2,17 @@
 
 @layer base {
   :root {
-    --brand-forest: #1F5E4B;
-    --brand-forest-dark: #163A30;
-    --brand-forest-hover: #174A3B;
-    --brand-mint: #EAF5EF;
-    --brand-mint-light: #F2FAF5;
-    --brand-coral: #FF6B81;
-    --brand-coral-soft: #FFEBEB;
+    /* 1. Established Core Palette */
+    --belmo-green: #1F5E4B;
+    --belmo-green-hover: #164336;
+    --belmo-green-dark: #0F2E24;
+    --belmo-mint: #F0F7F4;
+    --belmo-mint-border: #E0EFE8;
+    --belmo-rose: #FF4D6D;
+    --belmo-rose-soft: #FFF0F3;
+    --belmo-navy: #0B121E;
+    --belmo-canvas: #FAF9F6;
+    --whatsapp-green: #25D366;
   }
 
   *, *::before, *::after {
@@ -21,9 +25,9 @@
     overflow-x: hidden;
     margin: 0;
     padding: 0;
-    font-family: 'Tajawal', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #F8FAF8;
-    color: #1A3028;
+    font-family: 'Tajawal', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #FAF9F6;
+    color: #0F172A;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -127,3 +131,4 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+

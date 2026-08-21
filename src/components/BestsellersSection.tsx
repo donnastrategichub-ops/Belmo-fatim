@@ -52,22 +52,22 @@ export const BestsellersSection = ({
 
   return (
     <section id="catalog-section" className="px-3 sm:px-4 py-8 my-8 w-full max-w-full overflow-hidden">
-      <div className="w-full max-w-5xl mx-auto space-y-6 sm:space-y-8">
+      <div className="w-full max-w-5xl mx-auto space-y-6">
         
         {/* Header with Title & Sort */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-right">
           <div>
-            <div className="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-bold mb-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            <div className="inline-flex items-center gap-1.5 bg-[#F0F7F4] text-[#1F5E4B] border border-emerald-100 px-3 py-1 rounded-full text-xs font-bold mb-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#1F5E4B]" />
               <span>تشكيلة المنتجات الأصلية 100%</span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
               جميع المنتجات المختارة
             </h2>
 
-            <p className="text-xs sm:text-sm text-slate-500 mt-1">
-              مكياج روز بيري الإماراتي الفاخر وأجود منتجات العناية بالبشرة الكورية
+            <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
+              مكياج روز بيري الإماراتي الفاخر وأجود منتجات العناية بالبشرة الكورية الأصلية
             </p>
           </div>
 
@@ -80,8 +80,8 @@ export const BestsellersSection = ({
           </div>
         </div>
 
-        {/* Filter Tabs with Ample Spacing */}
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none w-full">
+        {/* Filter Tabs with systematic pill radius */}
+        <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar w-full">
           {categories.map((cat) => {
             const isActive = activeCategory === cat.id;
             return (
@@ -90,8 +90,8 @@ export const BestsellersSection = ({
                 onClick={() => setActiveCategory(cat.id)}
                 className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer shrink-0 ${
                   isActive
-                    ? 'bg-slate-900 text-white shadow-sm'
-                    : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
+                    ? 'bg-[#1F5E4B] text-white shadow-2xs font-black'
+                    : 'bg-white text-slate-700 hover:bg-slate-50 border border-slate-200/80'
                 }`}
               >
                 {cat.label}
@@ -100,7 +100,7 @@ export const BestsellersSection = ({
           })}
         </div>
 
-        {/* Product Grid with Generous Spacing and White Space */}
+        {/* Product Grid with Generous Spacing */}
         {isLoading ? (
           <BestsellersSkeleton />
         ) : (

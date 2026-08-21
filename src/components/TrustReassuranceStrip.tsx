@@ -1,53 +1,30 @@
-import { Truck, Banknote, ShieldCheck, Headphones, Gift } from 'lucide-react';
+import React from 'react';
+import { Truck, Banknote, ShieldCheck, MessageCircle } from 'lucide-react';
 
-export const TrustReassuranceStrip = () => {
+export const TrustReassuranceStrip: React.FC = () => {
   const items = [
-    {
-      icon: Truck,
-      title: 'توصيل سريع',
-      subtitle: '24-48h',
-    },
-    {
-      icon: Banknote,
-      title: 'الدفع عند الاستلام',
-      subtitle: 'آمن وموثوق',
-    },
-    {
-      icon: ShieldCheck,
-      title: 'كوري 100%',
-      subtitle: 'أصلي ومضمون',
-    },
-    {
-      icon: Headphones,
-      title: 'دعم مباشر',
-      subtitle: 'واتساب متاح',
-    },
-    {
-      icon: Gift,
-      title: 'تغليف فاخر',
-      subtitle: 'مجاناً للطلب',
-    },
+    { icon: ShieldCheck, label: 'أصلي 100%' },
+    { icon: Banknote, label: 'الدفع عند الاستلام' },
+    { icon: Truck, label: 'توصيل سريع' },
+    { icon: MessageCircle, label: 'استشارة قبل الشراء' },
   ];
 
   return (
-    <section className="px-3 sm:px-4 py-8 my-8 w-full max-w-full overflow-hidden">
-      <div className="w-full max-w-5xl mx-auto bg-white rounded-2xl border border-slate-100 p-4 sm:p-5 shadow-[0_4px_25px_rgba(0,0,0,0.02)]">
-        <div className="grid grid-cols-5 gap-2 text-center">
+    <section className="px-3 sm:px-4 py-4 my-4 w-full max-w-full overflow-hidden">
+      <div className="w-full max-w-5xl mx-auto bg-slate-50/80 rounded-2xl border border-slate-100/90 py-3 px-3 sm:px-6 shadow-2xs">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 items-center justify-between">
           {items.map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={idx}
-                className="flex flex-col items-center justify-center p-2 rounded-xl hover:bg-slate-50 transition-colors"
+                className="flex items-center justify-center sm:justify-start gap-2 py-1 px-2 text-slate-700"
               >
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-[#1F5E4B] mb-2 shadow-2xs">
-                  <Icon className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.75]" />
+                <div className="w-6 h-6 rounded-full bg-white border border-slate-200/60 flex items-center justify-center text-[#1F5E4B] shrink-0 shadow-2xs">
+                  <Icon className="w-3.5 h-3.5 stroke-[2]" />
                 </div>
-                <span className="text-[10px] sm:text-xs font-bold text-slate-900 leading-tight block truncate w-full">
-                  {item.title}
-                </span>
-                <span className="text-[9px] sm:text-[10px] text-slate-500 leading-tight mt-1 block truncate w-full">
-                  {item.subtitle}
+                <span className="text-xs sm:text-xs font-bold text-slate-800 whitespace-nowrap">
+                  {item.label}
                 </span>
               </div>
             );
